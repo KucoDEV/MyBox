@@ -21,9 +21,7 @@
 
 ### Backend
 - [Flask](https://flask.palletsprojects.com/) - Framework web en Python
-- [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/) - ORM pour la base de données SQLite
 - [Flask-CORS](https://flask-cors.readthedocs.io/) - Gestion des requêtes cross-origin
-- SQLite - Base de données légère et efficace
 
 ### Frontend
 - HTML5 / CSS3 / JavaScript
@@ -77,11 +75,12 @@ L'application sera accessible sur **`http://127.0.0.1:5000/`**.
 
 ## 📡 API Endpoints
 
-| Méthode | Endpoint         | Description                     |
-|---------|-----------------|---------------------------------|
-| `GET`   | `/api/notes`    | Récupérer toutes les notes     |
-| `POST`  | `/api/notes`    | Ajouter une nouvelle note      |
-| `DELETE`| `/api/notes/<id>` | Supprimer une note par ID    |
+| Méthode | Endpoint             | Description |
+|---------|----------------------|-------------|
+| `GET`   | `/api/notes`         | Liste toutes les notes |
+| `GET`   | `/api/note/<filename>` | Récupère le contenu d’une note |
+| `POST`  | `/api/note`          | Enregistre une nouvelle note |
+| `DELETE` | `/api/note/<filename>` | Supprime une note |
 
 ## 🎨 Interface Utilisateur
 
