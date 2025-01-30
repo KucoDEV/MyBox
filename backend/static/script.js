@@ -53,5 +53,16 @@ function deleteNote(filename) {
     }
 }
 
-// Affichage de l'éditeur
-var quill = new Quill("#editor", { theme: "snow" });
+var quill = new Quill("#editor", {
+    theme: "snow",
+    modules: {
+        toolbar: "#toolbar"
+    }
+});
+
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const container = document.getElementById("main-container");
+    sidebar.classList.toggle("closed");
+    container.classList.toggle("menu-closed");
+}
