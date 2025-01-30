@@ -34,16 +34,18 @@
 
 ```
 📦 MyBox
-├── static/
-│   ├── style.css   # Styles CSS
-│   ├── script.js   # Scripts front-end
-├── templates/
-│   ├── index.html  # Page d'accueil avec liste des notes
-│   ├── note.html   # Page d'édition des notes
-├── database.db     # Base de données SQLite
-├── app.py          # Backend Flask
-├── README.md       # Documentation du projet
-└── requirements.txt # Liste des dépendances Python
+├── backend/
+│   ├── app.py             # Backend Flask
+│   ├── static/
+│   │   ├── script.js      # Scripts front-end
+│   │   └── style.css      # Styles CSS
+│   └── templates/
+│       ├── index.html     # Page d'accueil avec liste des notes
+│       └── note.html      # Page d'édition des notes
+├── notes/
+│   └── *.md               # Notes Markdown
+├── README.md              # Documentation du projet
+└── requirements.txt       # Liste des dépendances Python
 ```
 
 ## 📌 Installation et Configuration
@@ -68,7 +70,7 @@ pip install -r requirements.txt
 Démarrer le serveur Flask :
 
 ```sh
-python app.py
+python backend/app.py
 ```
 
 L'application sera accessible sur **`http://127.0.0.1:5000/`**.
