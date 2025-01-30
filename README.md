@@ -1,4 +1,4 @@
-# 📦 My Box - Gestion de Notes en Ligne
+# [ 📦 My Box ] - Gestion de Notes en Ligne
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Flask](https://img.shields.io/badge/Backend-Flask-red)](https://flask.palletsprojects.com/)
@@ -6,7 +6,7 @@
 
 ## ✨ Introduction
 
-**[ My Box ]** est une application web permettant aux utilisateurs de créer, sauvegarder et consulter leurs notes en ligne. Ce projet est conçu pour offrir une expérience fluide et minimaliste avec un éditeur Markdown et une interface moderne.
+**[ 📦 My Box ]** est une application web permettant aux utilisateurs de créer, sauvegarder et consulter leurs notes en ligne. Ce projet est conçu pour offrir une expérience fluide et minimaliste avec un éditeur Markdown et une interface moderne.
 
 ## 🚀 Fonctionnalités
 
@@ -83,7 +83,7 @@ L'application sera accessible sur **`http://127.0.0.1:5000/`**.
 
 ## 🎨 Interface Utilisateur
 
-L'interface utilisateur de **[ My Box ]** est pensée pour être simple et efficace :
+L'interface utilisateur de **[ 📦 My Box ]** est pensée pour être simple et efficace :
 - 📜 **Liste des notes** affichées sous forme de menu latéral.
 - ✍️ **Éditeur Markdown** interactif et facile à utiliser.
 - 📌 **Bouton de sauvegarde** permettant d'enregistrer instantanément les notes.

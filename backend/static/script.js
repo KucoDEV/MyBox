@@ -1,20 +1,57 @@
-var quill = new Quill('#editor', { theme: 'snow' });
+document.addEventListener("DOMContentLoaded", function () {
+    loadNotes();
+});
 
-// Fonction pour sauvegarder une note
+// Charger la liste des notes
+function loadNotes() {
+    fetch("/api/notes")
+        .then(response => response.json())
+        .then(files => {
+            let noteList = document.getElementById("note-list");
+            noteList.innerHTML = "";
+            files.forEach(file => {
+                let listItem = document.createElement("li");
+                let link = document.createElement("a");
+                link.href = `/note/${file}`;
+                link.textContent = file;
+                listItem.appendChild(link);
+                noteList.appendChild(listItem);
+            });
+        });
+}
+
+// Sauvegarder une note
 function saveNote() {
-    let filename = document.getElementById("filename").value;
+    let filename = document.getElementById("filename").value.trim();
     let content = quill.root.innerHTML;
+    if (filename === "") {
+        alert("Veuillez entrer un nom de fichier !");
+        return;
+    }
 
-    fetch('/api/note', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    fetch("/api/note", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ filename, content })
     })
-    .then(() => location.reload());
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        loadNotes(); // Recharger la liste
+    });
 }
 
-// Fonction pour supprimer une note
+// Supprimer une note
 function deleteNote(filename) {
-    fetch(`/api/note/${filename}`, { method: 'DELETE' })
-    .then(() => location.reload());
+    if (confirm("Voulez-vous vraiment supprimer cette note ?")) {
+        fetch(`/api/note/${filename}`, { method: "DELETE" })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                loadNotes();
+            });
+    }
 }
+
+// Affichage de l'éditeur
+var quill = new Quill("#editor", { theme: "snow" });
