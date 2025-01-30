@@ -44,14 +44,22 @@ def get_note_content(filename):
 @app.route('/api/note', methods=['POST'])
 def save_note():
     data = request.json
-    filename = data['filename'].strip() + ".md"
+    filename = data['filename']
+
+    if not filename.endswith('.md'):
+        filename += '.md'
+
     content = data['content']
-    filepath = os.path.join(NOTES_DIR, filename)
     
-    with open(filepath, 'w', encoding='utf-8') as f:
+    notes_directory = '../notes'
+    if not os.path.exists(notes_directory):
+        os.makedirs(notes_directory)
+
+    with open(os.path.join(notes_directory, filename), 'w', encoding='utf-8') as f:
         f.write(content)
-    
-    return jsonify({"message": "Note sauvegardée avec succès!"})
+
+    return jsonify({"message": f"Note {filename} enregistrée avec succès !"})
+
 
 # API - Supprimer une note
 @app.route('/api/note/<filename>', methods=['DELETE'])

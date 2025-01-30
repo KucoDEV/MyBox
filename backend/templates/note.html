@@ -1,73 +1,119 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>[ 📦 My Box ]</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
-    </head>
-    <body>
-        <!-- Menu latéral -->
-        <div class="sidebar" id="sidebar">
-            <br/><br/>
-            <h2>📂 Mes Notes</h2>
-            <ul id="note-list">
-                {% for file in files %}
-                    <li>
-                        <a href="/note/{{ file }}">{{ file }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[ My Box ]</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
 
-        <!-- Bouton Hamburger -->
-        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    <!-- 📂 Menu latéral -->
+    <div class="sidebar" id="sidebar">
+        <br><br><h2>📂 Mes Notes</h2>
+        <ul id="note-list">
+            {% for file in files %}
+                <li>
+                    <a href="/note/{{ file }}">{{ file }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-        <!-- Contenu principal -->
-        <div class="container" id="main-container">
-            <h1>✍️ Édition de {{ filename }}</h1>
+    <!-- 🍔 Bouton Hamburger -->
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+
+    <!-- ✏️ Contenu principal -->
+    <div class="container">
+        <h1>✍️ Édition de {{ filename }}</h1>
+
+        <!-- 🖊️ Bouton pour activer l'édition -->
+        <button id="toggleEditMode">✏️ Modifier</button>
+
+        <!-- ✍️ Zone d'édition avec barre d'outils cachée -->
+        <div id="editor-container">
+            <div id="toolbar" style="display: none;">
+                <select class="ql-font"></select>
+                <select class="ql-size"></select>
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+                <button class="ql-list" value="ordered"></button>
+                <button class="ql-list" value="bullet"></button>
+                <button class="ql-link"></button>
+                <button class="ql-image"></button>
+                <button class="ql-blockquote"></button>
+                <button class="ql-code-block"></button>
+                <button class="ql-clean"></button>
+            </div>
             <div id="editor"></div>
-            <button onclick="saveNote('{{ filename }}')">💾 Sauvegarder</button>
         </div>
 
-        <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"/>
-        <script>
-            function toggleSidebar() {
-                const sidebar = document.getElementById("sidebar");
-                const container = document.getElementById("main-container");
-                sidebar.classList.toggle("closed");
-                container.classList.toggle("menu-closed");
+        <!-- 💾 Bouton de sauvegarde (caché par défaut) -->
+        <button id="saveButton" onclick="saveNote('{{ filename }}')" style="display: none;">💾 Sauvegarder</button>
+    </div>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <script>
+        var quill = new Quill("#editor", {
+            theme: "snow",
+            readOnly: true, // Mode lecture par défaut
+            modules: {
+                toolbar: "#toolbar" // Utilisation de la barre d’outils personnalisée
             }
+        });
 
-            var quill = new Quill("#editor", { theme: "snow" });
+        var toggleButton = document.getElementById("toggleEditMode");
+        var saveButton = document.getElementById("saveButton");
+        var toolbar = document.getElementById("toolbar");
+        var isEditing = false; // Mode lecture par défaut
 
-            fetch(`/api/note/{{ filename }}`)
-                .then((response) => {
-                    if (!response.ok)
-                        throw new Error("Erreur lors du chargement de la note");
-                    return response.json();
-                })
-                .then((data) => {
-                    quill.root.innerHTML = data.content;
-                })
-                .catch((err) => alert(err.message));
+        // Charger la note existante
+        fetch("/api/note/{{ filename }}")
+            .then(response => response.json())
+            .then(data => {
+                quill.root.innerHTML = data.content;
+            });
 
-            function saveNote(filename) {
-                fetch("/api/note", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        filename: filename,
-                        content: quill.root.innerHTML,
-                    }),
+        // 🖊️ Activer/Désactiver le mode édition
+        toggleButton.addEventListener("click", function () {
+            isEditing = !isEditing;
+            quill.enable(isEditing); // Active/Désactive l'édition
+            saveButton.style.display = isEditing ? "inline-block" : "none"; // Afficher/Masquer le bouton Sauvegarder
+            toolbar.style.display = isEditing ? "block" : "none"; // Afficher/Masquer la barre d'outils
+            toggleButton.innerHTML = isEditing ? "👁️ Mode Lecture" : "✏️ Modifier"; // Changer le texte du bouton
+        });
+
+        // 💾 Sauvegarde de la note
+        function saveNote(filename) {
+            fetch("/api/note", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    filename: filename, // Conserve le bon nom
+                    content: quill.root.innerHTML
                 })
-                .then((response) => response.json())
-                .then((data) => alert(data.message))
-                .catch((err) =>
-                    alert("Erreur lors de l'enregistrement : " + err.message)
-                );
+            })
+            .then(() => alert("Note enregistrée !"))
+            .catch(error => console.error("Erreur :", error));
+        }
+
+        // 📂 Fonction pour gérer l'ouverture/fermeture du menu latéral
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            var container = document.querySelector(".container");
+
+            if (sidebar.classList.contains("closed")) {
+                sidebar.classList.remove("closed");
+                container.classList.remove("menu-closed");
+            } else {
+                sidebar.classList.add("closed");
+                container.classList.add("menu-closed");
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
 </html>
