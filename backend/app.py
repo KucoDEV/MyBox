@@ -5,9 +5,11 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+
 # Dossier où seront stockées les notes
-NOTES_DIR = "../notes"
+NOTES_DIR = "notes"
 os.makedirs(NOTES_DIR, exist_ok=True)
+
 
 # Page principale
 @app.route('/')
@@ -15,11 +17,13 @@ def home():
     files = [f for f in os.listdir(NOTES_DIR) if f.endswith(".md")]
     return render_template('index.html', files=files)
 
+
 # API - Lister les notes
 @app.route('/api/notes', methods=['GET'])
 def list_notes():
     files = [f for f in os.listdir(NOTES_DIR) if f.endswith(".md")]
     return jsonify(files)
+
 
 # API - Lire une note
 @app.route('/note/<filename>', methods=['GET'])
@@ -51,7 +55,7 @@ def save_note():
 
     content = data['content']
     
-    notes_directory = '../notes'
+    notes_directory = 'notes'
     if not os.path.exists(notes_directory):
         os.makedirs(notes_directory)
 
