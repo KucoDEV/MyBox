@@ -14,7 +14,6 @@
 - 💾 **Sauvegarde automatique** des notes en ligne.
 - 🔍 **Gestion des notes** via une interface simple et intuitive.
 - ❌ **Suppression de notes** via une API REST.
-- 📦 **Stockage en base de données SQLite** pour une gestion persistante.
 - 🌐 **Interface responsive et moderne** avec Quill.js et un design en dark mode.
 
 ## 🛠️ Technologies Utilisées
