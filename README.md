@@ -1,97 +1,102 @@
-# [ 📦 My Box ] - Online Notes Management
+# [ 📦 My Box ] - Gestion de Notes en Ligne
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Flask](https://img.shields.io/badge/Backend-Flask-red)](https://flask.palletsprojects.com/)
 [![HTML/CSS/JS](https://img.shields.io/badge/Frontend-HTML%2FCSS%2FJS-brightgreen)]()
 
+
+## ❗ DOCUMENTATION IN OTHER LANGUAGES
+📄 [English documentation](https://github.com/KucoDEV/MyBox/blob/main/README_en.md)
+
+
 ## ✨ Introduction
 
-**[ 📦 My Box ]** is a web application that allows users to create, save, and view their notes online. This project is designed to provide a smooth and minimalist experience with a Markdown editor and a modern interface.
+**[ 📦 My Box ]** est une application web permettant aux utilisateurs de créer, sauvegarder et consulter leurs notes en ligne. Ce projet est conçu pour offrir une expérience fluide et minimaliste avec un éditeur Markdown et une interface moderne.
 
-## 🚀 Features
+## 🚀 Fonctionnalités
 
-- 📄 **Create notes** with an interactive Markdown editor.
-- 💾 **Automatic saving** of notes online.
-- 🔍 **Manage notes** via a simple and intuitive interface.
-- ❌ **Delete notes** via a REST API.
-- 🌐 **Responsive and modern interface** with Quill.js and a dark mode design.
+- 📄 **Création de notes** avec un éditeur Markdown interactif.
+- 💾 **Sauvegarde automatique** des notes en ligne.
+- 🔍 **Gestion des notes** via une interface simple et intuitive.
+- ❌ **Suppression de notes** via une API REST.
+- 🌐 **Interface responsive et moderne** avec Quill.js et un design en dark mode.
 
-## 🛠️ Technologies Used
+## 🛠️ Technologies Utilisées
 
 ### Backend
-- [Flask](https://flask.palletsprojects.com/) - Python web framework
-- [Flask-CORS](https://flask-cors.readthedocs.io/) - Handling cross-origin requests
+- [Flask](https://flask.palletsprojects.com/) - Framework web en Python
+- [Flask-CORS](https://flask-cors.readthedocs.io/) - Gestion des requêtes cross-origin
 
 ### Frontend
 - HTML5 / CSS3 / JavaScript
-- [Quill.js](https://quilljs.com/) - Rich text editor
-- JavaScript for dynamic interactions
+- [Quill.js](https://quilljs.com/) - Éditeur de texte enrichi
+- JavaScript pour les interactions dynamiques
 
-## 📂 Project Structure
+## 📂 Structure du Projet
 
 ```
 📦 MyBox
 ├── backend/
-│   ├── app.py             # Flask backend
+│   ├── app.py             # Backend Flask
 │   ├── static/
-│   │   ├── script.js      # Frontend scripts
-│   │   └── style.css      # CSS styles
+│   │   ├── script.js      # Scripts front-end
+│   │   └── style.css      # Styles CSS
 │   └── templates/
-│       ├── index.html     # Homepage with note list
-│       └── note.html      # Note editing page
+│       ├── index.html     # Page d'accueil avec liste des notes
+│       └── note.html      # Page d'édition des notes
 ├── notes/
-│   └── *.md               # Markdown notes
-├── README.md              # Project documentation
-└── requirements.txt       # Python dependencies list
+│   └── *.md               # Notes Markdown
+├── README.md              # Documentation du projet
+└── requirements.txt       # Liste des dépendances Python
 ```
 
-## 📌 Installation and Setup
+## 📌 Installation et Configuration
 
-### 1️⃣ Clone the repository
+### 1️⃣ Cloner le dépôt
 
 ```sh
-git clone https://github.com/your-repo/MyBox.git
+git clone https://github.com/votre-repo/MyBox.git
 cd MyBox
 ```
 
-### 2️⃣ Install Python dependencies
+### 2️⃣ Installer les dépendances Python
 
-Make sure Python is installed, then run:
+Assurez-vous d'avoir Python installé, puis exécutez :
 
 ```sh
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Run the application
+### 3️⃣ Lancer l'application
 
-Start the Flask server:
+Démarrer le serveur Flask :
 
 ```sh
 python backend/app.py
 ```
 
-The application will be accessible at **`http://127.0.0.1:5000/`**.
+L'application sera accessible sur **`http://127.0.0.1:5000/`**.
 
 ## 📡 API Endpoints
 
-| Method  | Endpoint              | Description |
+| Méthode | Endpoint             | Description |
 |---------|----------------------|-------------|
-| `GET`   | `/api/notes`         | Lists all notes |
-| `GET`   | `/api/note/<filename>` | Retrieves the content of a note |
-| `POST`  | `/api/note`          | Saves a new note |
-| `DELETE` | `/api/note/<filename>` | Deletes a note |
+| `GET`   | `/api/notes`         | Liste toutes les notes |
+| `GET`   | `/api/note/<filename>` | Récupère le contenu d’une note |
+| `POST`  | `/api/note`          | Enregistre une nouvelle note |
+| `DELETE` | `/api/note/<filename>` | Supprime une note |
 
-## 🎨 User Interface
+## 🎨 Interface Utilisateur
 
-The user interface of **[ 📦 My Box ]** is designed to be simple and efficient:
-- 📜 **List of notes** displayed as a sidebar menu.
-- ✍️ **Interactive Markdown editor** for easy note-taking.
-- 📌 **Save button** to instantly save notes.
+L'interface utilisateur de **[ 📦 My Box ]** est pensée pour être simple et efficace :
+- 📜 **Liste des notes** affichées sous forme de menu latéral.
+- ✍️ **Éditeur Markdown** interactif et facile à utiliser.
+- 📌 **Bouton de sauvegarde** permettant d'enregistrer instantanément les notes.
 
-## 📜 License
+## 📜 Licence
 
-This project is licensed under the **MIT** license. You are free to modify and use it as you see fit.
+Ce projet est sous licence **MIT**. Vous êtes libre de le modifier et de l'utiliser comme bon vous semble.
 
 ---
 
-✨ **Developed with ❤️ by [KucoDEV](https://github.com/KucoDEV/)** ✨
+✨ **Développé avec ❤️ par [KucoDEV](https://github.com/KucoDEV/)** ✨
